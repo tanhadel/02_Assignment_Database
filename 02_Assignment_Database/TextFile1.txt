@@ -1,0 +1,64 @@
+﻿Table DeiverInfo {
+  Id int [PK, increment ]
+  Titel nvarchar (20) [not null]
+  FirstName nvarchar (20) [not null]
+  LastName nvarchar (20) [not null]
+  PhoneNumber varchar (14) [not null, unique]
+
+}
+Table DriverAddess {
+  Id int [PK, increment]
+  StreetName nvarchar (30) [not null]
+  StreetNumber int (5) [not null]
+  PostalCode char (10) [not null]
+  City nvarchar (30) [not null]
+  Distrect nvarchar (20) [not null]
+
+}
+Table TruckInfo {
+  Id int [PK, increment]
+  TruckType nvarchar (20) [not null]
+  TruckColor nvarchar (30) [not null]
+  RegNumber int (30) [not null]
+  CountryOfReg nvarchar (30) [not null]
+  Truckweigh int [not null]
+
+
+} 
+Table CountryOfDistination{
+  Id int [PK, increment]
+  CountryName nvarchar(20) [not null]
+  City nvarchar (20) [not null]
+  StreetName nvarchar (20) [not null]
+  StreetNumber int (5) [not null]
+  PostalCode char (10) [not null]
+  Distrect nvarchar (20) [not null]
+  }
+
+  Table CompanyInfo {
+    Id int [PK,increment]
+    CompanyName nvarchar (30) [not null]
+    CountryName nvarchar (20) [not null]
+    CompanyRegNr int (12) [not null]
+    TaxNumber int (20) [not null]
+
+  }
+
+
+  Table ContactAddresses{
+    CompanyInfoId int [PK, ref:> CompanyInfo.Id]
+    DriverAddessId int [PK, ref:> DriverAddess.Id ] 
+    TruckInfoId int [PK, ref: > TruckInfo.Id]
+    CountryOfDistinationId int [PK, ref:> CountryOfDistination.Id]
+    DeiverInfoId int [PK,ref:> DeiverInfo.Id]
+
+   
+
+  }
+
+
+
+
+Ref: "ContactAddresses"."TruckInfoId" < "ContactAddresses"."CountryOfDistinationId"
+
+Ref: "TruckInfo"."Id" < "TruckInfo"."TruckColor"
