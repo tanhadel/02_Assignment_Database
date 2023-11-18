@@ -7,12 +7,30 @@ namespace _02_Assignment_Database.ConTexts;
 
 internal class DataContext : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public DataContext()
     {
-        optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\Taha the one\OneDrive\Skrivbord\Databas\02_Assignment_Database\02_Assignment_Database\ConTexts\Vd_Database.mdf';Integrated Security=True;Connect Timeout=30");
     }
+
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
+    {
+
+    }
+
     public DbSet<AddressEntity> Address { get; set; }
+    public DbSet<CreateCustomerEntity> CreateCustomer { get; set; }
     public DbSet<CompanyInfoEntity> CompanyInfo { get; set; }
-    public DbSet<TruckInfoEntity> TruckInfo { get; set; }
+    public DbSet<DriverInfoEntity> DriverInfo { get; set; }
+    public DbSet<GodsInfoEntity> GodsInfo { get; set; }
+    public DbSet<TruckInfoEntity> TruckInfoEntities { get; set; }
+   
+    
+
+
 
 }
+
+
+    
+   
+
+        
