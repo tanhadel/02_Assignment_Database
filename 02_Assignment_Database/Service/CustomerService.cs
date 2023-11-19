@@ -2,7 +2,8 @@
 
 using _02_Assignment_Database.Enitities;
 using _02_Assignment_Database.Models;
-using _02_Assignment_Database.Repository;
+using _02_Assignment_Database.Repositories;
+
 using System.Diagnostics;
 
 namespace _02_Assignment_Database.Service;
@@ -10,6 +11,7 @@ namespace _02_Assignment_Database.Service;
 internal class CustomerService
 
 {
+    
     private readonly AddressRepository _addressRepository;
     private readonly CustomerRepository _customerRepository;
     private readonly CompanyInfoRepository _companyInfoRepository;
@@ -30,6 +32,7 @@ internal class CustomerService
         _truckInfoRepository = truckInfoRepository;
     }
 
+
     public async Task<bool> CreateCustomerAsync(CustomerRegForm regForm)
     {
 
@@ -39,17 +42,8 @@ internal class CustomerService
 
         {
 
-            AddressEntity addressEntity = await _addressRepository.GetAsync(x => x.StreetName == regForm.StreetName && x.streetNumber == regForm.StreetNumber);
+            AddressEntity addressEntity = await _addressRepository.GetAsync(x => x.StreetName == regForm.StreetName && x.StreetNumber == regForm.StreetNumber);
             addressEntity ??= await _addressRepository.CreateAsync(new AddressEntity { StreetName = regForm.StreetName,StreetNumber =regForm.StreetNumber, PostalCode = regForm.PostalCode, District = regForm.District, City=regForm.City,Country=regForm.Country});
-        
-
-        //AddressEntity addressEntity = await _addressRepository.GetAsync(x => x.StreetName == regForm.StreetName && PostalCode ==regForm.PostalCode );
-        //    //if (addressEntity == null)
-            //    addressEntity = await _addressRepository.CreateAsync(new AddressEntity {  });
-
-
-
-            // Nu kan du använda addressEntity som behövs i din kod
 
 
 
@@ -85,16 +79,3 @@ internal class CustomerService
 
 
 
-
-   //if (addressEntity == null)
-   //         {
-   //             addressEntity = new AddressEntity
-   //             {
-   //                 StreetName = regForm.StreetName,
-   //                 StreetNumber = regForm.StreetNumber,
-   //                 PostalCode = regForm.PostalCode,
-   //                 City = regForm.City,
-   //                 District = regForm.District,
-   //                 Country = regForm.Country
-   //             };
-   //         }

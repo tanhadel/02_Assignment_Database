@@ -6,7 +6,8 @@ using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Net.NetworkInformation;
 
-namespace _02_Assignment_Database.ServiceRepository;
+///*namespace _02_Assignment_Database.ServiceRepository*/;
+namespace _02_Assignment_Database.Repositories;
 
 internal abstract class Repo <TEntity> where TEntity : class
 {
@@ -22,34 +23,56 @@ internal abstract class Repo <TEntity> where TEntity : class
 
     public virtual async Task<TEntity> CreateAsync(TEntity entity)
     {
-        await _context.Set<TEntity>().AddAsync(entity);
-        await _context.SaveChangesAsync();
+        try
+        {
+            await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+            
+        }
+        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+
         return entity ?? null!;
-
-
 
     }
 
     public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
     {
 
+        try
+        {
 
-        var enttiy = await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
-        return enttiy ?? null!;
+            var enttiy = await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
+            return enttiy ?? null!;
+        }
 
+        catch (Exception ex ) { Debug.WriteLine(ex.Message); }
+
+        return null!;
+
+      
 
     }
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        return await _context.Set<TEntity>().ToListAsync();
+        try
+        {
+            return await _context.Set<TEntity>().ToListAsync();
+        }
+        catch (Exception ex ) { Debug.WriteLine(ex.Message); }
+        return Enumerable.Empty<TEntity>();
     }
 
     public virtual async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        _context.Set<TEntity>().Update(entity);
-        await _context.SaveChangesAsync();
-        return entity ?? null!;
+        try
+        {
+            _context.Set<TEntity>().Update(entity);
+            await _context.SaveChangesAsync();
+            return entity ?? null!;
+        }
+        catch (Exception ex ){ Debug.WriteLine(ex.Message); }
+        return null!;
     }
 
     public virtual async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> expression)
@@ -67,7 +90,12 @@ internal abstract class Repo <TEntity> where TEntity : class
     }
     public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression)
     {
-        return await _context.Set<TEntity>().AnyAsync(expression);
+        try
+        {
+            return await _context.Set<TEntity>().AnyAsync(expression);
+        }
+        catch (Exception ex ) { Debug.WriteLine(ex.Message); 
+            return false; }
 
     }
 }

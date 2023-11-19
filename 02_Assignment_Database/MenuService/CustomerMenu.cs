@@ -2,8 +2,7 @@
 
 using _02_Assignment_Database.Models;
 using _02_Assignment_Database.Service;
-using _02_Assignment_Database.ServiceRepository;
-using Castle.Core.Logging;
+
 
 namespace _02_Assignment_Database.MenuSeervice;
 
@@ -84,9 +83,9 @@ internal class CustomerMenu
         RegForm.TruckColour = Console.ReadLine()!;
         Console.Write("Truck weight");
         RegForm.Weight = Console.ReadLine()!;
+        Console.Write("--------------------------");
 
         Console.Write("Enter Gods Infotmation");
-        Console.Write("--------------------------");
         Console.Write("Gods type :");
         RegForm.Typeofgods = Console.ReadLine()!;
 

@@ -1,17 +1,11 @@
 ﻿using _02_Assignment_Database.ConTexts;
-using _02_Assignment_Database.ServiceRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace _02_Assignment_Database.Repository
+
+namespace _02_Assignment_Database.Repositories;
+
+internal class DriverInfoRepository : Repo<DriverInfoRepository>
 {
-    internal class DriverInfoRepository : Repo<DriverInfoRepository>
+    public DriverInfoRepository(DataContext context) : base(context)
     {
-        public DriverInfoRepository(DataContext context) : base(context)
-        {
-        }
     }
 }

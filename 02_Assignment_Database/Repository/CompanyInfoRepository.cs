@@ -1,9 +1,10 @@
 ﻿
 
 using _02_Assignment_Database.ConTexts;
-using _02_Assignment_Database.ServiceRepository;
 
-namespace _02_Assignment_Database.Repository;
+
+namespace _02_Assignment_Database.Repositories;
+
 
 internal class CompanyInfoRepository : Repo<CompanyInfoRepository>
 {

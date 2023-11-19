@@ -211,9 +211,10 @@ namespace _02_Assignment_Database.MenuSeervice
                 Console.WriteLine("Border line,");
                 Console.WriteLine("Welcome to the border line");
                 Console.WriteLine("To Cross the border we need the following information from you");
-                Console.WriteLine("1: To File the information below press one");
-                Console.WriteLine("2: If you need personal service press two");
-                Console.WriteLine("3: If you do not have the information press three");
+                Console.WriteLine("1: Press 1 to fill in the forme");
+                Console.WriteLine("2: press 2 to list all customer");
+                Console.WriteLine("3: press 3 If you need personal service press two");
+                Console.WriteLine("0: press 0 to exit the program");
                 Console.WriteLine("-------------------------------------------");
 
                 var option = Console.ReadLine()!;
@@ -227,10 +228,14 @@ namespace _02_Assignment_Database.MenuSeervice
 
                     case "2":
                         await _customerMenu.ListAllAsync();
-                    
-                        break;
 
+                        break;
                     case "3":
+                        await BorderMainMenu();
+                        Console.WriteLine("Go to gauge number 3 to get personal service");
+                        
+                        break;
+                    case "0":
                         await BorderMainMenu();
                         Console.WriteLine("You chose to exit the program.");
                         Environment.Exit(0);
@@ -249,8 +254,6 @@ namespace _02_Assignment_Database.MenuSeervice
 
 
 
-
-        // ... (Din befintliga kod)
 
         private void DisplayForm(
             DriverInfoEntity driverInfoEntity,
@@ -277,8 +280,6 @@ namespace _02_Assignment_Database.MenuSeervice
                     LastName = driverInfoEntity.LastName,
                     PhoneNumber = driverInfoEntity.PhoneNumber,
 
-
-                    // ... (fortsätt med andra egenskaper för DriverInfoEntity)
                 };
 
                 context.DriverInfo.Add(driverInfo);
@@ -294,7 +295,6 @@ namespace _02_Assignment_Database.MenuSeervice
             }
         }
 
-        // ... (Din befintliga kod)
     }
 
 
