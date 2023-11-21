@@ -41,25 +41,44 @@ internal class CustomerService
         if (await _customerRepository.ExistsAsync(x => x.LastName == regForm.LastName))
 
         {
+          
 
-            AddressEntity addressEntity = await _addressRepository.GetAsync(x => x.StreetName == regForm.StreetName && x.StreetNumber == regForm.StreetNumber);
-            addressEntity ??= await _addressRepository.CreateAsync(new AddressEntity { StreetName = regForm.StreetName,StreetNumber =regForm.StreetNumber, PostalCode = regForm.PostalCode, District = regForm.District, City=regForm.City,Country=regForm.Country});
+            return false;
 
-
-
-            //create 
-            CreateCustomerEntity createCustomerEntity = await _customerRepository.CreateAsync(new CreateCustomerEntity {FirstName= regForm.FirstName,LastName= regForm.LastName,PhoneNumber =regForm.PhoneNumber,
-              StreetName=regForm.StreetName,StreetNumber=regForm.StreetNumber,PostalCode=regForm.PostalCode,
-              City=regForm.City,District=regForm.District,Country=regForm.Country,CompanyName=regForm.CompanyName,
-              Companyreg=regForm.Companyreg,TaxNumber=regForm.TaxNumber,CompanyAddress=regForm.CompanyAddress,
-              RegNumber=regForm.RegNumber,CountryregCode=regForm.CountryregCode,
-              TruckColour=regForm.TruckColour,Weight=regForm.Weight,Typeofgods=regForm.Typeofgods});
-            if (createCustomerEntity != null)
-                return true;
+           
         }
+      
+        AddressEntity addressEntity = await _addressRepository.GetAsync(x => x.StreetName == regForm.StreetName && x.StreetNumber == regForm.StreetNumber);
+        addressEntity ??= await _addressRepository.CreateAsync(new AddressEntity { StreetName = regForm.StreetName, StreetNumber = regForm.StreetNumber, PostalCode = regForm.PostalCode, District = regForm.District, City = regForm.City, Country = regForm.Country });
 
+
+
+        //create 
+        CreateCustomerEntity createCustomerEntity = await _customerRepository.CreateAsync(new CreateCustomerEntity
+        {
+            FirstName = regForm.FirstName,
+            LastName = regForm.LastName,
+            PhoneNumber = regForm.PhoneNumber,
+            StreetName = regForm.StreetName,
+            StreetNumber = regForm.StreetNumber,
+            PostalCode = regForm.PostalCode,
+            City = regForm.City,
+            District = regForm.District,
+            Country = regForm.Country,
+            CompanyName = regForm.CompanyName,
+            Companyreg = regForm.Companyreg,
+            TaxNumber = regForm.TaxNumber,
+            CompanyAddress = regForm.CompanyAddress,
+            RegNumber = regForm.RegNumber,
+            CountryregCode = regForm.CountryregCode,
+            TruckColour = regForm.TruckColour,
+            Weight = regForm.Weight,
+            Typeofgods = regForm.Typeofgods
+        });
+        if (createCustomerEntity != null)
+            return true;
         return false;
-        
+
     }
 
   public async Task<IEnumerable<CreateCustomerEntity>> GetAllAsync()

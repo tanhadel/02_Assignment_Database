@@ -2,7 +2,7 @@
 
 using _02_Assignment_Database.Models;
 using _02_Assignment_Database.Service;
-
+using System.Diagnostics;
 
 namespace _02_Assignment_Database.MenuSeervice;
 
@@ -16,6 +16,7 @@ internal class CustomerMenu
     }
 
   
+    //Menu
 
     public async Task CreateAsync()
     {
@@ -36,27 +37,31 @@ internal class CustomerMenu
         RegForm.LastName = Console.ReadLine()!;
         Console.Write("PhoneNumber: ");
         RegForm.PhoneNumber = Console.Read()!;
-
+     
         Console.WriteLine("Enter the driver's Address");
-        Console.WriteLine("-----------------------------------");
-        Console.Write("StreetName :");
+        Console.WriteLine("Street Name: ");
         RegForm.StreetName = Console.ReadLine()!;
-        Console.Write("StreetNumber :");
+
+
+        Console.WriteLine("Street Number:");
         RegForm.StreetNumber = Console.ReadLine()!;
-        Console.Write("PostalCode (000 00) :");
+
+   
+      
+        Console.Write("PostalCode (00000) :");
         if (int.TryParse(Console.ReadLine(), out int postalcode))
         {
             RegForm.PostalCode = postalcode.CompareTo(0);
         }
         else
 
-            Console.WriteLine("Invslied Potalcode");
+        Console.WriteLine("Invslied Potalcode");
 
-        Console.Write("City: ");
+        Console.WriteLine("City: ");
         RegForm.City = Console.ReadLine()!;
-        Console.Write("District: ");
+        Console.WriteLine("District: ");
         RegForm.District = Console.ReadLine()!;
-        Console.Write("Country: ");
+        Console.WriteLine("Country: ");
         RegForm.Country = Console.ReadLine()!;
 
         Console.WriteLine("Enter Conpany Information :");
@@ -75,25 +80,29 @@ internal class CustomerMenu
 
         Console.Write("Enter Truck Information:");
         Console.WriteLine("------------------------");
-        Console.Write("Truck Reg ´Number :");
+        Console.WriteLine("Truck Reg ´Number :");
         RegForm.RegNumber = Console.ReadLine()!;
-        Console.Write("Country Registretion Code :");
+        Console.WriteLine("Country Registretion Code :");
         RegForm.CountryregCode = Console.ReadLine()!;
         Console.Write("Truck Colour :");
         RegForm.TruckColour = Console.ReadLine()!;
-        Console.Write("Truck weight");
+        Console.WriteLine("Truck weight");
         RegForm.Weight = Console.ReadLine()!;
-        Console.Write("--------------------------");
+        Console.WriteLine("--------------------------");
 
-        Console.Write("Enter Gods Infotmation");
-        Console.Write("Gods type :");
+        Console.WriteLine("Enter Gods Infotmation");
+        Console.WriteLine("Gods type :");
         RegForm.Typeofgods = Console.ReadLine()!;
 
-        var result = await _customerSerivce.CreateCustomerAsync(RegForm);
-        if (result)
-            Console.WriteLine(" Information saved successfully!");
-        else
-            Console.WriteLine("Could not creat the customer, try again!");
+        try
+        {
+            var result = await _customerSerivce.CreateCustomerAsync(RegForm);
+            if (result)
+                Console.WriteLine(" Information saved successfully!");
+            else
+                Console.WriteLine("Could not creat the customer, try again!");
+        }
+        catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
 
 
